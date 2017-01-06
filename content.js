@@ -1,3 +1,5 @@
+// Here You can type your custom JavaScript...
+
 
 function ready(fn) {
   if (document.readyState != 'loading'){
@@ -17,29 +19,42 @@ ready(function() {
 
 
     function onAutofill() {
-        if(affectedInputs.indexOf(originElement) == -1) {
+        if(affectedInputs.indexOf(originElement) == -1) {
             affectedInputs.unshift(originElement);
         }
+        var inputBoundingRect = originElement.getBoundingClientRect();
+        var d = document.getElementById('autofill-checker-tooltip');
+        if(!d) {
+           d = document.createElement("div");
+           d.id = 'autofill-checker-tooltip';
+        }
+        d.textContent = affectedInputs.length+' inputs automatically filled';
+        d.style.top = (inputBoundingRect.top+document.body.scrollTop)+'px';
+        d.style.left = (5+inputBoundingRect.left+inputBoundingRect.width+document.body.scrollLeft)+'px';
+        d.style.opacity = 1;
+        document.body.appendChild(d);
+        setTimeout(function() {
+          fadeOut(d);
+        }, 2000);
         chrome.runtime.sendMessage({
           from:    'content',
           subject: 'showPageAction'
         });
     }
 
+
     chrome.runtime.onMessage.addListener(function (msg, sender, response) {
-
       if ((msg.from === 'popup') && (msg.subject === 'DOMInfo')) {
-
         var values = [];
         for(var j = 0 ; j < affectedInputs.length; ++j) {
             values.push(affectedInputs[j].value);
         }
-
         // Directly respond to the sender (popup),
         // through the specified callback
         response(values);
       }
     });
+
 
     function inputChangedEvent(input) {
         return function(e) {
@@ -82,4 +97,19 @@ function debounce(f, wait) {
         }
         debounceTimeout = setTimeout(f, wait);
     }
+}
+function fadeOut(el) {
+  el.style.opacity = 1;
+
+  var last = +new Date();
+  var tick = function() {
+    el.style.opacity = +el.style.opacity - (new Date() - last) / 400;
+    last = +new Date();
+
+    if (+el.style.opacity > 0) {
+      (window.requestAnimationFrame && requestAnimationFrame(tick)) || setTimeout(tick, 16);
+    }
+  };
+
+  tick();
 }

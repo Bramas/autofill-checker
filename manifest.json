@@ -3,13 +3,13 @@
 
   "name": "Autofill Checker",
   "description": "Check what the chrome autofill actually filled",
-  "version": "1.0",
+  "version": "1.1",
   "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
       "js": ["content.js"],
-        "run_at": "document_start",
-        "all_frames": false
+      "css": ["style.css"],
+      "run_at": "document_idle"
     }
   ],
   "background": {
