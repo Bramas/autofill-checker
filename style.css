@@ -1,12 +1,12 @@
+@import url('https://fonts.googleapis.com/css?family=Roboto');
+
 #autofill-checker-tooltip
 {
+  background-color: rgba(0, 0, 0, 0.6);
+  border-radius: 4px;
+  color: #fff;
+  font-family: 'Roboto', sans-serif, Helvetica;  
+  padding: 4px;
   position: absolute;
   z-index: 99999;
-  background: #ffd7d7;
-  color: rgb(109, 42, 42);
-  font-weight: bold;
-  border: 1px solid rgba(167, 0, 0, 1);
-  padding: 5px;
-  border-radius: 5px;
-  box-shadow: rgba(167, 0, 0, 0.7) 0px 0px 6px;
 }

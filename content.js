@@ -1,6 +1,3 @@
-// Here You can type your custom JavaScript...
-
-
 function ready(fn) {
   if (document.readyState != 'loading'){
     fn();
@@ -75,7 +72,7 @@ ready(function() {
             }
             lastChange = now;
 
-        }
+        };
     }
 
     // apply the event to every input in the page
@@ -93,11 +90,12 @@ function debounce(f, wait) {
     return function() {
         if(debounceTimeout) {
             clearTimeout(debounceTimeout);
-            debounceTimeout = null
+            debounceTimeout = null;
         }
         debounceTimeout = setTimeout(f, wait);
-    }
+    };
 }
+
 function fadeOut(el) {
   el.style.opacity = 1;
 

@@ -1,9 +1,9 @@
 {
-  "manifest_version": 2,
+  "manifest_version": 3,
 
   "name": "Autofill Checker",
   "description": "Check what the chrome autofill actually filled",
-  "version": "1.1",
+  "version": "1.2",
   "content_scripts": [
     {
       "matches": ["http://*/*","https://*/*"],
