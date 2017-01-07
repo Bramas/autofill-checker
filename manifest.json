@@ -1,5 +1,5 @@
 {
-  "manifest_version": 3,
+  "manifest_version": 2,
 
   "name": "Autofill Checker",
   "description": "Check what the chrome autofill actually filled",
